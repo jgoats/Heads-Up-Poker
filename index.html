@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="index.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <title>Heads Up Texas Holdem</title>
 </head>
 <body>
-    <div class="card-container">
+    <div class="allCards">
 
     </div>
-    <script src="main.js"></script>
+    <button id="startGame">Start New Game</button>
+    <div id="playerTurn">Turn:</div>
+    <div id="playerOne">You</div>
+        <div id="cardholderOne" class="cardholder"></div>
+        <div id="cardholderTwo" class="cardholder"></div>
+        <div id="highcardPlayerOne" class="cardholder"></div> 
+
+    <div id="playerTwo">AI</div>
+        <div id="cardholderThree" class="cardholder"></div>
+        <div id="cardholderFour" class="cardholder"></div>
+        <div id="highcardPlayerTwo" class="cardholder"></div>
+
+<script src="game.js"></script>
 </body>
 </html>

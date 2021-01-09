@@ -1,7 +1,139 @@
-.card-container {
-    border : 3px solid red;
-    width : 300px;
-    height : 300px;
-    margin-left : auto;
-    margin-right : auto;
+html {
+    overflow : hidden;
+    padding : 0px;
+    margin : 0px;
+    background-image : url("./assets/images/pokerTable.jpg");
+   background-repeat : no-repeat;
+   background-size : cover;
+   width : 100vw;
+   height : 100vh;
 }
+
+.allCards {
+   width : 40px;
+   height : 60px;
+   position : absolute;
+   top : 47%;
+   left : 30%;
+}
+.cards {
+    z-index : 1;
+    background-color : white;
+    width : 40px;
+    height : 60px;
+   position : absolute;
+   left : 30%;
+   top : 40%;
+}
+.cardsFaceDown {
+    width : 40px;
+    height : 60px;
+}
+.image-top-left {
+    width : 15px;
+    height : 15px;
+    position : relative;
+    top : 0;
+    left : 0;
+    display : block;
+}
+.image-bottom-right {
+    width : 15px;
+    height : 15px;
+    position : relative;
+    top : 50%;
+    left : 60%;
+    display : block;
+}
+.number {
+    width : 20px;
+    height : 20px;
+    position : absolute;
+    border : 1px solid purple;
+    text-align : center;
+    margin-left : 9px;
+    font-weight : bold;
+    padding-top : 3px; 
+}
+
+#playerOne {
+position : absolute;
+top : 90%;
+left : 47%;
+padding : 0px;
+margin : 0px;
+color : yellow;
+font-weight : bold;
+font-size : 30px;
+text-decoration : underline;
+font-family: 'Architects Daughter', cursive;
+}
+#playerTwo {
+top : 5%;
+left : 48%;
+position : absolute;
+padding : 0px;
+margin : 0px;
+color : yellow;
+font-weight : bold;
+font-size : 30px;
+font-family: 'Architects Daughter', cursive;
+text-decoration : underline;
+}
+
+.cardholder {
+    width : 40px;
+    height : 60px;
+    position : absolute;
+}
+#cardholderOne {
+top : 20%;
+left : 45%;
+}
+#cardholderTwo {
+top : 20%;
+left : 49%;
+}
+#cardholderThree {
+top : 75%;
+left : 45%;
+}
+#cardholderFour {
+top : 75%;
+left : 49%;
+}
+#highcardPlayerOne {
+    top : 60%;
+    left : 47%;
+}
+#highcardPlayerTwo {
+    top : 35%;
+    left : 47%;
+}
+#startGame {
+    position : absolute;
+    top : 5%;
+    left : 20%;
+    font-weight : bold;
+    color : black;
+    font-size : 17px;
+}
+#button {
+    border-radius : 50%;
+    background-color : "gold";
+    width : 15px;
+    height : 15px;
+    position : absolute;
+    top : 50%;
+    left : 50%;
+}
+
+#playerTurn {
+    text-align : center;
+    margin-bottom : 20px;
+    color : gold;
+    font-weight : bold;
+    font-size : 20px;
+    font-family: 'Architects Daughter', cursive;
+}
+
