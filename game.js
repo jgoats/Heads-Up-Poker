@@ -5,6 +5,11 @@ var cardSuits = ["spades" , "hearts" , "clubs" , "diamonds"];
 var players = 2;
 var playerTurn;
 var button;
+var playerStackLocation = document.getElementById("chipsForPlayer");
+var AIStackLocation = document.getElementById("chipsForAI");
+var playerChips;
+var AIChips;
+var chipStartingAmount = 20;
 
 
 function createDeck () {
@@ -228,11 +233,18 @@ function dealHighCardToAI (inc) {
     playerHighCard.append(topCard);
 }
 
-function CreateButton (Turn) {
-    this.Turn = Turn;
+function CreateButton (highCard) {
     var button = document.createElement("div");
     button.setAttribute("id" , "button");
-    
+    if (highCard === 2) {
+        document.getElementById("playerButtonLocation").append(button);
+        document.getElementById("aiButtonLocation").innerHTML = "";
+        
+    }
+    else if (highCard === 1) {
+        document.getElementById("aiButtonLocation").append(button);
+        document.getElementById("playerButtonLocation").innerHTML = "";
+    }
 }
 
 function rankCards (rank) {
@@ -242,6 +254,25 @@ function rankCards (rank) {
     else if (rank === "K") return 13;
     else if (rank === "A") return 14;
     else {return rank}
+}
+
+function HandleChipStacks (location, amount) {
+    this.location = location;
+    this.amount = amount;
+    if (location === playerStackLocation) {
+        var image = document.createElement("img");
+        image.setAttribute("src" , "./assets/images/chipStack.png");
+        image.setAttribute("width" , "60px");
+        image.setAttribute("height" , "60px");
+        playerStackLocation.append(image);
+    }
+    else if (location === AIStackLocation) {
+        var image = document.createElement("img");
+        image.setAttribute("src" , "./assets/images/chipStack.png");
+        image.setAttribute("width" , "60px");
+        image.setAttribute("height" , "60px");
+        AIStackLocation.append(image);
+    }
 }
 
 
@@ -263,6 +294,16 @@ var AiCard = cards[cards.length - 2].innerHTML;
  else {
      console.log("tie");
  }
+if (playerChips === undefined) {
+    playerChips = new HandleChipStacks(playerStackLocation , chipStartingAmount);
+}
+if (AIChips === undefined) {
+    AIChips = new HandleChipStacks(AIStackLocation , chipStartingAmount);
+}
+    
+    
+
+
 
 }
 createFaceDownCardOnTopOfDeck(1);
