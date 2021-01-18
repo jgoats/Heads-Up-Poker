@@ -85,6 +85,7 @@ text-decoration : underline;
     width : 40px;
     height : 60px;
     position : absolute;
+    border : 1px solid black;
 }
 #cardholderOne {
 top : 20%;
@@ -175,4 +176,20 @@ left : 49%;
     top : 7%;
     left : 53%;
 }
+#playerChipCount {
+    font-size : 30px;
+    color : black;
+    position : absolute;
+    top : 87%;
+    left : 59%;
+}
+
+#AIChipCount {
+    font-size : 30px;
+    color : black;
+    position : absolute;
+    top : 4%;
+    left : 58%;
+}
+
 

@@ -7,9 +7,18 @@ var playerTurn;
 var button;
 var playerStackLocation = document.getElementById("chipsForPlayer");
 var AIStackLocation = document.getElementById("chipsForAI");
-var playerChips;
 var AIChips;
-var chipStartingAmount = 20;
+var AIChipAmount = 20;
+var playerChips;
+var playerChipAmount = 20;
+var playersHand = {
+    card1 : undefined,
+    card2 : undefined
+}
+var AIsHand = {
+    card1 : undefined,
+    card2 : undefined
+}
 
 
 function createDeck () {
@@ -204,14 +213,155 @@ function createFaceDownCardOnTopOfDeck (cardNumber) {
 }
 
 
-// resets all cards to be face up
-function createFaceUpCardOnTopOfDeck () {
-    cards = document.getElementsByClassName("cards");
-        while(cards.length > 0) {
-            cards[0].remove();
+// takes the specified card and recreates the face up card to match the deck array
+function createFaceUpCardOnTopOfDeck (cardNumber) {
+    var cards = document.getElementsByClassName("cards");
+        while(cards[cards.length - cardNumber].firstChild) {
+            cards[cards.length - cardNumber].removeChild(cards[cards.length - cardNumber].firstChild);
         }
-        createFaceUpCards();
+        var specificCard = deck[deck.length - cardNumber];
+        let card = document.getElementsByClassName("cards")[cards.length - cardNumber];
+        if (specificCard.match("A")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("A");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("2")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("2");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("3")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("3");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("4")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("4");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("5")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("5");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("6")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("6");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("7")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("7");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("8")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("8");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("9")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("9");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("T")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("10");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        
+        else if (specificCard.match("J")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("J");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("Q")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("Q");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+        else if (specificCard.match("K")) {
+            let number = document.createElement("p");
+            let textNode = document.createTextNode("K");
+            number.append(textNode);
+            number.setAttribute("class" , "number");
+            card.append(number);
+        }
+
+        if (specificCard.match("diamonds")) {
+    let imageTopLeft = document.createElement("img");
+    imageTopLeft.setAttribute("class" , "image-top-left");
+    imageTopLeft.setAttribute("src" , "./assets/images/diamond.png");
+    card.append(imageTopLeft);
+
+    let imageBottomRight = document.createElement("img");
+    imageBottomRight.setAttribute("class" , "image-bottom-right");
+    imageBottomRight.setAttribute("src" , "./assets/images/diamond.png");
+    card.append(imageBottomRight);
+        }
+    if (specificCard.match("clubs")) {
+        let imageTopLeft = document.createElement("img");
+        imageTopLeft.setAttribute("class" , "image-top-left");
+        imageTopLeft.setAttribute("src" , "./assets/images/club.png");
+        card.append(imageTopLeft);
+    
+        let imageBottomRight = document.createElement("img");
+        imageBottomRight.setAttribute("class" , "image-bottom-right");
+        imageBottomRight.setAttribute("src" , "./assets/images/club.png");
+        card.append(imageBottomRight);
+    }
+    if (specificCard.match("spades")) {
+        let imageTopLeft = document.createElement("img");
+            imageTopLeft.setAttribute("class" , "image-top-left");
+            imageTopLeft.setAttribute("src" , "./assets/images/spade.png");
+            card.append(imageTopLeft);
+
+            let imageBottomRight = document.createElement("img");
+            imageBottomRight.setAttribute("class" , "image-bottom-right");
+            imageBottomRight.setAttribute("src" , "./assets/images/spade.png");
+            card.append(imageBottomRight);
+    }
+    if (specificCard.match("hearts")) {
+        let imageTopLeft = document.createElement("img");
+        imageTopLeft.setAttribute("class" , "image-top-left");
+        imageTopLeft.setAttribute("src" , "./assets/images/heart.png");
+        card.append(imageTopLeft);
+
+        let imageBottomRight = document.createElement("img");
+        imageBottomRight.setAttribute("class" , "image-bottom-right");
+        imageBottomRight.setAttribute("src" , "./assets/images/heart.png");
+        card.append(imageBottomRight);
+    }
+
 }
+
+
 
 function dealHighCardToPlayer (inc) {
     var cards = document.getElementsByClassName("cards");
@@ -223,14 +373,52 @@ function dealHighCardToPlayer (inc) {
     playerHighCard.append(topCard);
 }
 
+function dealFirstCardToPlayer (increment) {
+    var cards = document.getElementsByClassName("cards");
+    var playerFirstCard = document.getElementById("cardholderThree");
+    var topCard = cards[cards.length - increment];
+    topCard.style.position = "relative";
+    topCard.style.left = "-1%";
+    topCard.style.top = "1%";
+    playerFirstCard.append(topCard);
+}
+function dealSecondCardToPlayer (increment) {
+    var cards = document.getElementsByClassName("cards");
+    var playerFirstCard = document.getElementById("cardholderFour");
+    var topCard = cards[cards.length - increment];
+    topCard.style.position = "relative";
+    topCard.style.left = "-1%";
+    topCard.style.top = "1%";
+    playerFirstCard.append(topCard);
+}
+function dealFirstCardToAI (increment) {
+    var cards = document.getElementsByClassName("cards");
+    var AIFirstCard = document.getElementById("cardholderOne");
+    var topCard = cards[cards.length - increment];
+    topCard.style.position = "relative";
+    topCard.style.left = "-1%";
+    topCard.style.top = "1%";
+    AIFirstCard.append(topCard);
+}
+function dealSecondCardToAI (increment) {
+    var cards = document.getElementsByClassName("cards");
+    var AIFirstCard = document.getElementById("cardholderTwo");
+    var topCard = cards[cards.length - increment];
+    topCard.style.position = "relative";
+    topCard.style.left = "-1%";
+    topCard.style.top = "1%";
+    AIFirstCard.append(topCard);
+}
+
+
 function dealHighCardToAI (inc) {
     var cards = document.getElementsByClassName("cards");
-    var playerHighCard = document.getElementById("highcardPlayerTwo");
+    var AIHighCard = document.getElementById("highcardPlayerTwo");
     var topCard = cards[cards.length - inc];
     topCard.style.position = "relative";
     topCard.style.left = "-1%";
     topCard.style.top = "1%";
-    playerHighCard.append(topCard);
+    AIHighCard.append(topCard);
 }
 
 function CreateButton (highCard) {
@@ -239,11 +427,12 @@ function CreateButton (highCard) {
     if (highCard === 2) {
         document.getElementById("playerButtonLocation").append(button);
         document.getElementById("aiButtonLocation").innerHTML = "";
-        
+       setTimeout(() => dealCards("player") , 3000);
     }
     else if (highCard === 1) {
         document.getElementById("aiButtonLocation").append(button);
         document.getElementById("playerButtonLocation").innerHTML = "";
+       setTimeout(() => dealCards("AI") , 3000);
     }
 }
 
@@ -265,6 +454,12 @@ function HandleChipStacks (location, amount) {
         image.setAttribute("width" , "60px");
         image.setAttribute("height" , "60px");
         playerStackLocation.append(image);
+        var chipCount = document.createElement("p");
+        chipCount.setAttribute("id" , "playerChipCount");
+        var chipCountNode = document.createTextNode(playerChipAmount);
+        chipCount.append(chipCountNode);
+        document.body.append(chipCount);
+
     }
     else if (location === AIStackLocation) {
         var image = document.createElement("img");
@@ -272,19 +467,23 @@ function HandleChipStacks (location, amount) {
         image.setAttribute("width" , "60px");
         image.setAttribute("height" , "60px");
         AIStackLocation.append(image);
+        var chipCount = document.createElement("p");
+        chipCount.setAttribute("id" , "AIChipCount");
+        var chipCountNode = document.createTextNode(AIChipAmount);
+        chipCount.append(chipCountNode);
+        document.body.append(chipCount);
     }
 }
 
 
 function handleHighCard () {
 shuffleDeck(deck);
-setTimeout(() => dealHighCardToPlayer(1) , 1000);
-setTimeout(() => dealHighCardToAI(2) , 2000);
+setTimeout(() => dealHighCardToPlayer(1), 1000);
+setTimeout(() => dealHighCardToAI(2), 2000);
 createFaceDownCardOnTopOfDeck(3);
 var cards = document.getElementsByClassName("number");
 var playerCard = cards[cards.length - 1].innerHTML;
 var AiCard = cards[cards.length - 2].innerHTML;
-
  if (parseInt(rankCards(playerCard)) > parseInt(rankCards(AiCard))) {
     button = new CreateButton(2);
  }
@@ -295,16 +494,55 @@ var AiCard = cards[cards.length - 2].innerHTML;
      console.log("tie");
  }
 if (playerChips === undefined) {
-    playerChips = new HandleChipStacks(playerStackLocation , chipStartingAmount);
+    playerChips = new HandleChipStacks(playerStackLocation , playerChipAmount);
 }
 if (AIChips === undefined) {
-    AIChips = new HandleChipStacks(AIStackLocation , chipStartingAmount);
+    AIChips = new HandleChipStacks(AIStackLocation , AIChipAmount);
 }
     
-    
+}
 
-
+function dealCards (buttonLocation) {
+if (buttonLocation === "player"){
+    shuffleDeck(deck);
+    createFaceDownCardOnTopOfDeck(1);
+    setTimeout(() => dealFirstCardToAI(1) , 2000);
+    createFaceUpCardOnTopOfDeck(2)
+    setTimeout(() => dealFirstCardToPlayer(2) , 4000);
+    createFaceDownCardOnTopOfDeck(3);
+    setTimeout(() => dealSecondCardToAI(3) , 6000);
+    createFaceUpCardOnTopOfDeck(4);
+    setTimeout(() => dealSecondCardToPlayer(4) , 8000);
+    createFaceDownCardOnTopOfDeck(5);
+    console.log(deck);
+    playersHand.card1 = deck[deck.length - 2];
+    playersHand.card2 = deck[deck.length - 4];
+console.log(playersHand);
+AIsHand.card1 = deck[deck.length - 1];
+AIsHand.card2 = deck[deck.length - 3];
+console.log(AIsHand);
 
 }
+else if (buttonLocation === "AI") {
+    shuffleDeck(deck);
+    createFaceUpCardOnTopOfDeck(1);
+    setTimeout(() => dealFirstCardToPlayer(1) , 2000);
+    createFaceDownCardOnTopOfDeck(2)
+    setTimeout(() => dealFirstCardToAI(2) , 4000);
+    createFaceUpCardOnTopOfDeck(3);
+    setTimeout(() => dealSecondCardToPlayer(3) , 6000);
+    createFaceDownCardOnTopOfDeck(4);
+    setTimeout(() => dealSecondCardToAI(4) , 8000);
+    createFaceDownCardOnTopOfDeck(5);
+    console.log(deck);
+    playersHand.card1 = deck[deck.length - 1];
+    playersHand.card2 = deck[deck.length - 3];
+console.log(playersHand);
+AIsHand.card1 = deck[deck.length - 2];
+AIsHand.card2 = deck[deck.length - 4];
+console.log(AIsHand);
+}
+}
+
 createFaceDownCardOnTopOfDeck(1);
 document.getElementById("startGame").addEventListener("click" , handleHighCard , false);
