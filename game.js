@@ -19,6 +19,10 @@ var AIsHand = {
     card1 : undefined,
     card2 : undefined
 }
+var smallBlind = 0.25;
+var bigBlind = 0.50;
+var currentBet = bigBlind;
+var currentPot = 0;
 
 
 function createDeck () {
@@ -503,36 +507,42 @@ if (AIChips === undefined) {
 }
 
 function dealCards (buttonLocation) {
-if (buttonLocation === "player"){
+if (buttonLocation === "player") {
     shuffleDeck(deck);
     createFaceDownCardOnTopOfDeck(1);
-    setTimeout(() => dealFirstCardToAI(1) , 2000);
+    setTimeout(() => dealFirstCardToAI(1) , 1000);
     createFaceUpCardOnTopOfDeck(2)
-    setTimeout(() => dealFirstCardToPlayer(2) , 4000);
+    setTimeout(() => dealFirstCardToPlayer(2) , 2000);
     createFaceDownCardOnTopOfDeck(3);
-    setTimeout(() => dealSecondCardToAI(3) , 6000);
+    setTimeout(() => dealSecondCardToAI(3) , 3000);
     createFaceUpCardOnTopOfDeck(4);
-    setTimeout(() => dealSecondCardToPlayer(4) , 8000);
+    setTimeout(() => dealSecondCardToPlayer(4) , 4000);
     createFaceDownCardOnTopOfDeck(5);
-    console.log(deck);
     playersHand.card1 = deck[deck.length - 2];
     playersHand.card2 = deck[deck.length - 4];
 console.log(playersHand);
 AIsHand.card1 = deck[deck.length - 1];
 AIsHand.card2 = deck[deck.length - 3];
 console.log(AIsHand);
-
+// small blind goes to player
+playerChipAmount = playerChipAmount - smallBlind;
+document.getElementById("playerChipCount").innerHTML = playerChipAmount;
+// big blind goes to AI
+AIChipAmount = AIChipAmount - bigBlind;
+document.getElementById("AIChipCount").innerHTML = AIChipAmount;
+currentPot = currentPot + smallBlind + bigBlind;
+document.getElementById("pot-text").innerHTML = smallBlind + bigBlind;
 }
 else if (buttonLocation === "AI") {
     shuffleDeck(deck);
     createFaceUpCardOnTopOfDeck(1);
-    setTimeout(() => dealFirstCardToPlayer(1) , 2000);
+    setTimeout(() => dealFirstCardToPlayer(1) , 1000);
     createFaceDownCardOnTopOfDeck(2)
-    setTimeout(() => dealFirstCardToAI(2) , 4000);
+    setTimeout(() => dealFirstCardToAI(2) , 2000);
     createFaceUpCardOnTopOfDeck(3);
-    setTimeout(() => dealSecondCardToPlayer(3) , 6000);
+    setTimeout(() => dealSecondCardToPlayer(3) , 3000);
     createFaceDownCardOnTopOfDeck(4);
-    setTimeout(() => dealSecondCardToAI(4) , 8000);
+    setTimeout(() => dealSecondCardToAI(4) , 4000);
     createFaceDownCardOnTopOfDeck(5);
     console.log(deck);
     playersHand.card1 = deck[deck.length - 1];
@@ -541,7 +551,95 @@ console.log(playersHand);
 AIsHand.card1 = deck[deck.length - 2];
 AIsHand.card2 = deck[deck.length - 4];
 console.log(AIsHand);
+// small blind goes to AI
+AIChipAmount = AIChipAmount - smallBlind;
+document.getElementById("AIChipCount").innerHTML = AIChipAmount;
+// big blind goes to player
+playerChipAmount = playerChipAmount - bigBlind;
+document.getElementById("playerChipCount").innerHTML = playerChipAmount;
+currentPot = currentPot + smallBlind + bigBlind;
+document.getElementById("pot-text").innerHTML = smallBlind + bigBlind;
 }
+}
+function createPot () {
+    var pot = document.createElement("img");
+    pot.setAttribute("id" , "pot");
+    pot.setAttribute("width" , "50px");
+    pot.setAttribute("height" , "50px");
+    pot.setAttribute("src" , "./assets/images/chipStack.png");
+    document.body.append(pot);
+    var textContainer = document.createElement("p");
+    textContainer.setAttribute("id" , "pot-text");
+    var textNode = document.createTextNode(currentPot + "");
+    textContainer.append(textNode);
+    document.body.append(textContainer);
+}
+function createControlContainer () {
+    var container = document.createElement("div");
+    container.setAttribute("id" , "control-container");
+    document.body.append(container);
+}
+createControlContainer();
+createCallButton();
+createFoldButton();
+createCheckButton();
+createRaiseButton();
+createPot();
+function createCallButton () {
+    var button = document.createElement("button");
+    button.setAttribute("id" , "call-button");
+    var textNode = document.createTextNode("Call");
+    button.append(textNode);
+    document.getElementById("control-container").append(button);
+}
+function createFoldButton () {
+    var button = document.createElement("button");
+    button.setAttribute("id" , "fold-button");
+    var textNode = document.createTextNode("Fold");
+    button.append(textNode);
+    document.getElementById("control-container").append(button);
+}
+function createRaiseButton () {
+    var button = document.createElement("button");
+    button.setAttribute("id" , "raise-button");
+    var textNode = document.createTextNode("Raise");
+    button.append(textNode);
+    document.getElementById("control-container").append(button);
+    var slideContainer = document.createElement("div");
+    slideContainer.setAttribute("class" , "slidecontainer");
+
+    var input = document.createElement("input");
+    input.setAttribute("type" , "range");
+    input.setAttribute("min" , currentBet + "");
+    input.setAttribute("max" , playerChipAmount + "");
+    input.setAttribute("value" , "0.50");
+    input.setAttribute("id" , "myRange");
+    input.setAttribute("class" , "slider");
+
+    slideContainer.append(input);
+    document.getElementById("control-container").append(slideContainer);
+    var demo = document.createElement("p");
+    demo.setAttribute("id" , "demo");
+    document.getElementById("control-container").append(demo);
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    document.getElementById("myRange").step = "0.5";
+  output.innerHTML = this.value;
+}
+}
+function createCheckButton () {
+    var button = document.createElement("button");
+    button.setAttribute("id" , "check-button");
+    var textNode = document.createTextNode("Check");
+    button.append(textNode);
+    document.getElementById("control-container").append(button);
+}
+function deleteCheckButton () {
+
 }
 
 createFaceDownCardOnTopOfDeck(1);
